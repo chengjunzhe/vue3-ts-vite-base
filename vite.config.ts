@@ -18,7 +18,7 @@ export default defineConfig(async ({ command, mode }) => {
   return {
     plugins: [
       vue(),
-      vueJsx(),
+      vueJsx(), //vue-jsx
       html({
         minify: true, // 开启最小化
         // 注入数据
@@ -86,6 +86,7 @@ export default defineConfig(async ({ command, mode }) => {
             vue: 'Vue',
           }),
         ],
+        //静态资源文件夹
         assetsDir: 'static/img/',
         rollupOptions: {
           output: {
@@ -97,6 +98,7 @@ export default defineConfig(async ({ command, mode }) => {
       },
     },
     resolve: {
+      // 配置别名
       alias: {
         '@': resolvePath('./src'),
       },
