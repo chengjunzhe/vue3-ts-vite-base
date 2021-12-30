@@ -1,26 +1,33 @@
 {
   "compilerOptions": {
+    // 生成js的运行环境
     "target": "esnext",
     // 解析非相对模块名的基准目录
-    "baseUrl": ".",
-    "useDefineForClassFields": true,
+    "baseUrl": "./",
+    // 生成模块的类别
     "module": "esnext",
-    "moduleResolution": "node",
+    // 严格检查
     "strict": true,
     "jsx": "preserve",
-    "sourceMap": true,
+    // 是否生成sourceMap
+    "sourceMap": false,
+    // 是否解析json文件
     "resolveJsonModule": true,
-    "esModuleInterop": true,
+    // 指定模块解析策略
+    "moduleResolution": "Node",
+    // lib.d.ts公共库
     "lib": [
       "esnext",
       "dom"
     ],
+    // 解析路径
     "paths": {
       "@/*": [
         "src/*"
       ],
     },
   },
+  // 解析文件
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",

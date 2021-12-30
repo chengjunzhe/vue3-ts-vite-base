@@ -3,15 +3,16 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 // import legacy from '@vitejs/plugin-legacy'//兼容传统浏览器
 import externalGlobals from 'rollup-plugin-external-globals' //cdn
-import { resolve } from 'path'
-import viteCompression from 'vite-plugin-compression' //gzip压缩
+// import viteCompression from 'vite-plugin-compression' //gzip压缩
 import html from 'vite-plugin-html' //html模板控制
+
+import { resolve } from 'path'
 
 // 解析绝对路径方法
 const resolvePath = (p: string) => resolve(__dirname, p)
 
 // 获取环境变量方法
-const getEnvConfig = (mode) => require(resolvePath(`./src/config/${mode}.ts`))
+const getEnvConfig = (mode: string) => require(resolvePath(`./src/config/${mode}.ts`))
 
 export default defineConfig(async ({ command, mode }) => {
   const envConfig = await getEnvConfig(mode)
@@ -28,16 +29,16 @@ export default defineConfig(async ({ command, mode }) => {
           },
         },
       }),
-      // gzip压缩
-      viteCompression({
-        //生成压缩包gz
-        verbose: true,
-        disable: false,
-        threshold: 10240,
-        algorithm: 'gzip',
-        ext: '.gz',
-      }),
-      //兼容传统浏览器
+      // // gzip压缩
+      // viteCompression({
+      //   //生成压缩包gz
+      //   verbose: true,
+      //   disable: false,
+      //   threshold: 10240,
+      //   algorithm: 'gzip',
+      //   ext: '.gz',
+      // }),
+      // //兼容传统浏览器
       // legacy({ targets: ['defaults', 'not IE 11'] })
     ],
     // 全局样式
@@ -86,14 +87,10 @@ export default defineConfig(async ({ command, mode }) => {
             vue: 'Vue',
           }),
         ],
-        //静态资源文件夹
-        assetsDir: 'static/img/',
-        rollupOptions: {
-          output: {
-            chunkFileNames: 'static/js/[name]-[hash].js',
-            entryFileNames: 'static/js/[name]-[hash].js',
-            assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
-          },
+        output: {
+          chunkFileNames: 'static/js/[name]-[hash].js',
+          entryFileNames: 'static/js/[name]-[hash].js',
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
         },
       },
     },

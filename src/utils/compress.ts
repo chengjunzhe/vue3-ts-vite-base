@@ -5,7 +5,7 @@
  * 回调函数
  */
 
-export function compress(fileObj: File, cb: (blob: Blob | null | undefined) => void) {
+export function compress(fileObj: File, cb: (b: Blob | null | undefined) => void) {
   try {
     // 压缩图片需要的一些元素和对象
     let img = new Image()
@@ -51,7 +51,7 @@ export function compress(fileObj: File, cb: (blob: Blob | null | undefined) => v
       // canvas转为blob并上传
       canvas.toBlob(function (blob) {
         cb(blob)
-        console.log('压缩成功 toblob ', URL.createObjectURL(blob))
+        console.log('压缩成功 toblob ', URL.createObjectURL(blob as Blob))
       }, fileObj.type || 'image/png')
     }
   } catch (e) {
